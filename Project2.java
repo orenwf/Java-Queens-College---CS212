@@ -1,19 +1,17 @@
 import java.awt.*;
-import javax.swing.*;
-public class Project1 {
-	
+import javax.swing.JFrame;
+public class Project2 {
+
 	static WordGUI myGUI;
 	static Container cPane;
 	static TextArea sorted, unsorted;
 	
 	public static void main(String args[]) {
-		Word[] theWords, theWordsToBeSorted, sortedWords;
-		initialize();		
+		initialize();
+		WordList theWords, sortedWords;
+		theWords = Word.makeWordList(args[0]);
+		sortedWords = Word.makeSortedList(args[0]);
 	// get input from text file and put in an array	of strings
-		theWords = Word.fillArray(args[0]);
-		int count = theWords.length;
-		theWordsToBeSorted = Word.copyWordArray(theWords, count);
-		sortedWords = Word.sSort(theWordsToBeSorted);
 		dataToGUI(theWords, sortedWords);
 	}
 	
@@ -28,15 +26,19 @@ public class Project1 {
 	      myGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	   }	
 	
-	public static void dataToGUI(Word[] unsortedWords, Word[] sortedWords) {
+	public static void dataToGUI(WordList unsortedWords, WordList sortedWords) {
 		cPane = myGUI.getContentPane();
 		unsorted = new TextArea();
 		sorted = new TextArea();
 		cPane.add(unsorted);
 		cPane.add(sorted);
-		for(int i = 0; i < unsortedWords.length; i++) {
-			unsorted.append(unsortedWords[i].getWord()+"\n");
-			sorted.append(sortedWords[i].getWord()+"\n");
+		unsortedWords.resetList();
+		for(int i=1; i<=unsortedWords.getListLength(); i++) {
+			unsorted.append(unsortedWords.nextWord().getWord()+"\n");
+		}
+		sortedWords.resetList();
+		for(int i=1; i<=sortedWords.getListLength(); i++) {
+			sorted.append(sortedWords.nextWord().getWord()+"\n");
 		}
 		myGUI.pack();
 		myGUI.setVisible(true);
