@@ -1,9 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
+/**  WordGUI objects are using in Project3.java to display the contents of a linked list; member methods for setting up GUI after instantiation and appending a sorted and unsorted linked list to WordGUI TextAreas in grid layout.  */
+
 public class WordGUI extends JFrame {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
     
     Container cPane;
@@ -20,15 +19,15 @@ public class WordGUI extends JFrame {
 	      setTitle("The Word GUI Project Pane");
 	      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
    }	
-	
+
 	public void dataToGUI(WordList unsortedWords, WordList sortedWords) {
         cPane = getContentPane();
 		unsorted = new TextArea();
 		sorted = new TextArea();
 		cPane.add(unsorted);
 		cPane.add(sorted);
-		unsortedWords.resetList();
-		for(int i=1; i<=unsortedWords.getListLength(); i++) {
+		unsortedWords.resetList(); // reset iterator for WordList
+		for(int i=1; i<=unsortedWords.getListLength(); i++) { // append method from WordList
 			unsorted.append(unsortedWords.nextWord().getWord()+"\n");
 		}
 		sortedWords.resetList();
